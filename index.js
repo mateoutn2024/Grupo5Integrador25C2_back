@@ -3,8 +3,8 @@ import session from 'express-session'; // Traigo el middleware para manejar sesi
 import cors from 'cors'; // Traigo CORS para permitir peticiones desde diferentes dominios (útil para APIs).
 import { sequelize } from './src/database/database.js'; // Traigo la conexión a la base de datos (Sequelize).
 // Traigo todos los archivos de rutas (routers):
-//import authRoutes from './src/routes/admin/auth.routes.js'; // Rutas de login/logout.
-//import adminRoutes from './src/routes/admin/admin.routes.js'; // Rutas del panel de administración (CRUD de productos, etc.).
+import authRoutes from './src/routes/admin/auth.routes.js'; // Rutas de login/logout.
+import adminRoutes from './src/routes/admin/admin.routes.js'; // Rutas del panel de administración (CRUD de productos, etc.).
 import apiProductosRoutes from './src/routes/api/productos.routes.js'; // Rutas de la API de productos (para el frontend/app).
 import apiVentasRoutes from './src/routes/api/ventas.routes.js'; // Rutas de la API de ventas (para registrar tickets).
 import environments from './src/config/environments.js'; // Traigo la configuración (como el número de puerto) del archivo environments.js.
@@ -15,7 +15,7 @@ const PUERTO = environments.port; // Saco el puerto de la configuración (de env
 // 3. CONFIGURACIÓN DE MIDDLEWARES GLOBALES (Se ejecutan en orden)
 app.use(cors()); // Permite que el backend hable con un frontend que esté en otro puerto o dominio.
 app.use(session({ // Configuro el sistema de sesiones para saber quién está logueado.
-    secret: environments.sessionSecret, // Texto secreto para encriptar la cookie de la sesión.
+    secret: 'secreto_super_seguro_tp_2025', // Texto secreto para encriptar la cookie de la sesión.
     resave: false, // No guardo la sesión si no ha cambiado.
     saveUninitialized: false, // No creo una sesión hasta que no se guarde algo en ella.
 }));
@@ -28,8 +28,8 @@ app.set('view engine', 'ejs'); // 4. Defino el motor de plantillas que vamos a u
 app.set('views', './src/views'); // Le digo a Express dónde buscar los archivos de las vistas.
 
 // 5. CONFIGURACIÓN DE RUTAS (Le digo a la app qué router usar para qué prefijo de URL)
-//app.use('/admin', authRoutes); // Todas las rutas de authRoutes empiezan con /admin (ej: /admin/login).
-//app.use('/admin', adminRoutes); // Todas las rutas del panel principal de admin.
+app.use('/admin', authRoutes); // Todas las rutas de authRoutes empiezan con /admin (ej: /admin/login).
+app.use('/admin', adminRoutes); // Todas las rutas del panel principal de admin.
 app.use('/api', apiProductosRoutes); // Todas las rutas de la API de productos empiezan con /api.
 app.use('/api', apiVentasRoutes); // Todas las rutas de la API de ventas.
 
