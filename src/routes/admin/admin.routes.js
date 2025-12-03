@@ -23,4 +23,7 @@ router.get('/estado/:id', checkAuth, productosAdminController.cambiarEstado);
 // Reporte Excel
 router.get('/ventas/excel', checkAuth, ventasAdminController.descargarExcel);
 
+// Eliminar
+router.get('/eliminar/:id', checkAuth, productosAdminController.eliminarProducto);
+
 export default router;

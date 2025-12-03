@@ -239,7 +239,7 @@ h1, h2, h3, .logo { font-family: 'Oswald', sans-serif; text-transform: uppercase
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 6px;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.9rem;
     display: flex; align-items: center; gap: 8px;
 }
