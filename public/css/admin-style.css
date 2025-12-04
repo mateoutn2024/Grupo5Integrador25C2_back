@@ -23,6 +23,8 @@ body {
     background-color: var(--bg-body);
     color: var(--text-main);
     min-height: 100vh;
+    position: relative;
+    padding-bottom: 80px;
 }
 
 h1, h2, h3, .logo { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
@@ -302,6 +304,12 @@ td {
     left: 0;            
     width: 100%;        
     text-align: center; 
-    padding: 15px;      
-    color: white;      
+    padding: 20px;      
+    background-color: var(--primary);
+    color: white;
+    font-size: 0.85rem;
+}
+
+.main-footer p {
+    margin: 5px 0;
 }
