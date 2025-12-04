@@ -293,3 +293,15 @@ td {
 }
 .action-btn:hover { color: var(--primary); }
 .btn-power { color: var(--danger); }
+
+/* Footer */
+/* El estilo para clavar el footer abajo */
+.main-footer {
+    position: absolute; 
+    bottom: 0;          
+    left: 0;            
+    width: 100%;        
+    text-align: center; 
+    padding: 15px;      
+    color: white;      
+}
