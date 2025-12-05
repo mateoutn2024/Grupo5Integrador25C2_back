@@ -39,23 +39,26 @@ export const productosAdminController = {
     // 3. Guardar Nuevo
     crearProducto: async (req, res) => {
         try {
-            const { nombre, precio, categoria, stock } = req.body;
-            let imagenes = [];
+            const { nombre, precio, categoria } = req.body;
+            let imagen = null;
             
-            if (req.files && req.files.length > 0) {
-                imagenes = req.files.map(f => f.filename);
+            if (req.file) {
+                imagen = req.file.filename;
             } else {
-                imagenes = ["https://placehold.co/600?text=Sin+Imagen"];
+                imagen = "https://placehold.co/600?text=Sin+Imagen";
             }
 
             await Producto.create({
-                nombre, precio, categoria, stock: stock || 0,
-                imagen: imagenes,
+                nombre, 
+                precio, 
+                categoria,
+                imagen,
                 activo: true
             });
 
             res.redirect('/admin/dashboard');
         } catch (error) {
+            console.error('Error al crear producto:', error);
             res.status(500).send('Error al guardar');
         }
     },
@@ -87,7 +90,6 @@ export const productosAdminController = {
             producto.nombre = nombre;
             producto.precio = precio;
             producto.categoria = categoria;
-            producto.stock = stock;
 
             // Si subió una nueva imagen, actualizo también el nombre de la imagen.
             if (req.file) {
